@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model {
     public function posts()
     {
+        // select * from posts where user_id = ?
         return $this->hasMany('Post');
     }
 };
@@ -14,16 +15,21 @@ class User extends Model {
 class Post extends Model {
     public function user()
     {
+        // select * from user where post_id = ? limit 1
         return $this->belongsTo('User');
     }
 
     public function category()
     {
+        // select * from category where post_id = ? limit 1
         return $this->belongsTo('Category');
     }
 
     public function tags()
     {
+        // select * tags
+        // join post_tag on tags.id = post_tag.tag_id
+        // where post_id = ?
         return $this->belongsToMany('Tag');
     }
 };
@@ -31,6 +37,9 @@ class Post extends Model {
 class Tag extends Model {
     public function posts()
     {
+        // select * posts
+        // join post_tag on posts.id = post_tag.post_id
+        // where tag_id = ?
         return $this->belongsToMany('Post');
     }
 };
@@ -38,37 +47,10 @@ class Tag extends Model {
 class Category extends Model {
     public function posts()
     {
+        // select * from posts where category_id = ?
         return $this->hasMany('Post');
     }
 };
 
-
-
-//$userposts = User::find(1)->posts()->get();
-//echo 'posts from user1';
-//foreach ($userposts as $userpost) {
-//    echo $userpost->text;
-//}
-
-//$user = Post::find(1)->user()->get();
-//var_dump($user->first()->username);
-
-//$user = Post::find(1)->category()->get();
-//var_dump($user->first()->category);
-
-//$user = Post::find(1)->tags()->get();
-//foreach ($user as $tag) {
-//    echo $tag->tag . ' ';
-//}
-
-//$user = Tag::find(1)->posts()->get();
-//foreach ($user as $tag) {
-//    echo $tag->text . ' ';
-//}
-
-//$user = Category::find(1)->posts()->get();
-//foreach ($user as $tag) {
-//    echo $tag->text . ' ';
-//}
 
 
