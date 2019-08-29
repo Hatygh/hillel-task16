@@ -79,7 +79,7 @@ insert into posts values
     (3, 2, 4, 'went to the deep dark forest'),
     (4, 3, 4, 'And her name was Albert Einstein');
 
-insert into blog.post_tags values
+insert into blog.post_tag values
     (1, 1),
     (1, 3),
     (1, 5),
